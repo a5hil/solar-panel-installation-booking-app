@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import NavBar from './components/NavBar'
+import AddSolar from './components/AddSolar'
 
 function App() {
 
@@ -25,7 +26,8 @@ function App() {
     </Routes>
     
     </BrowserRouter> */}
-    <NavBar/>
+
+    <AddSolar/>
     </>
   )
 }
