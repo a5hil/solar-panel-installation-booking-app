@@ -1,3 +1,4 @@
+// Home.jsx
 import "./home.css";
 import { useEffect, useRef } from "react";
 import NavBar from "./NavBar";
@@ -51,8 +52,9 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <>
       <NavBar />
+
       <div className="home-container">
         {/* Animated Background */}
         <div className="animated-bg">
@@ -207,7 +209,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
