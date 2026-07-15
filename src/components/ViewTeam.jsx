@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 
 const ViewTeam = () => {
   const [teams, setTeams] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchData = () => {
     axios
@@ -20,6 +21,23 @@ const ViewTeam = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const filteredTeams = teams.filter((team) => {
+    const searchValue = searchTerm.toLowerCase();
+
+    return [
+      team.bookingId,
+      team.technicianTeamId,
+      team.technicianTeamName,
+      team.teamLeaderName,
+      team.teamContactNumber,
+      team.numberOfTechnicians,
+      team.assignedVehicleNumber,
+      team.serviceZoneNumber,
+      team.installationStatus,
+      team.expectedCompletionDate,
+    ].some((field) => String(field ?? "").toLowerCase().includes(searchValue));
+  });
 
   const handleDelete = (indexToDelete) => {
     const shouldDelete = window.confirm("Delete this team record?");
@@ -51,6 +69,16 @@ const ViewTeam = () => {
           Technician Team Details
         </h2>
 
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search teams..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
+
         <div className="table-responsive">
           <table className="table table-bordered table-striped table-hover">
             <thead className="table-success">
@@ -70,7 +98,7 @@ const ViewTeam = () => {
             </thead>
 
             <tbody>
-              {teams.map((value, index) => (
+              {filteredTeams.map((value, index) => (
                 <tr key={index}>
                   <td>{value.bookingId}</td>
                   <td>{value.technicianTeamId}</td>
