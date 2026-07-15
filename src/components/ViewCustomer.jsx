@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 
 const ViewCustomer = () => {
   const [customers, setCustomers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchData = () => {
     axios
@@ -20,6 +21,23 @@ const ViewCustomer = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const filteredCustomers = customers.filter((customer) => {
+    const searchValue = searchTerm.toLowerCase();
+
+    return [
+      customer.bookingId,
+      customer.customerName,
+      customer.email,
+      customer.phoneNumber,
+      customer.alternatePhoneNumber,
+      customer.address,
+      customer.city,
+      customer.state,
+      customer.pincode,
+      customer.propertyType,
+    ].some((field) => String(field ?? "").toLowerCase().includes(searchValue));
+  });
 
   const handleDelete = (indexToDelete) => {
     const shouldDelete = window.confirm("Delete this customer record?");
@@ -51,6 +69,16 @@ const ViewCustomer = () => {
           Solar Panel Installation Bookings
         </h2>
 
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search customers..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
+
         <div className="table-responsive">
           <table className="table table-bordered table-striped table-hover">
             <thead className="table-success">
@@ -70,7 +98,7 @@ const ViewCustomer = () => {
             </thead>
 
             <tbody>
-              {customers.map((value, index) => (
+              {filteredCustomers.map((value, index) => (
                 <tr key={index}>
                   <td>{value.bookingId}</td>
                   <td>{value.customerName}</td>

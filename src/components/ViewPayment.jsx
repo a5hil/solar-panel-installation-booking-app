@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 
 const ViewPayment = () => {
   const [payments, setPayments] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchData = () => {
     axios
@@ -20,6 +21,22 @@ const ViewPayment = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const filteredPayments = payments.filter((payment) => {
+    const searchValue = searchTerm.toLowerCase();
+
+    return [
+      payment.bookingId,
+      payment.paymentId,
+      payment.customerName,
+      payment.totalAmount,
+      payment.balanceAmount,
+      payment.paymentMethod,
+      payment.paymentStatus,
+      payment.paymentDate,
+      payment.TransactionRefNumber,
+    ].some((field) => String(field ?? "").toLowerCase().includes(searchValue));
+  });
 
   const handleDelete = (indexToDelete) => {
     const shouldDelete = window.confirm("Delete this payment record?");
@@ -51,6 +68,16 @@ const ViewPayment = () => {
           Payment Details
         </h2>
 
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search payments..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </div>
+
         <div className="table-responsive">
           <table className="table table-bordered table-striped table-hover">
             <thead className="table-success">
@@ -69,7 +96,7 @@ const ViewPayment = () => {
             </thead>
 
             <tbody>
-              {payments.map((value, index) => (
+              {filteredPayments.map((value, index) => (
                 <tr key={index}>
                   <td>{value.bookingId}</td>
                   <td>{value.paymentId}</td>
