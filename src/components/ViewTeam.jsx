@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 
 const ViewTeam = () => {
@@ -19,6 +20,27 @@ const ViewTeam = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleDelete = (indexToDelete) => {
+    const shouldDelete = window.confirm("Delete this team record?");
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    setTeams((currentTeams) =>
+      currentTeams.filter((_, index) => index !== indexToDelete)
+    );
+
+    axios
+      .delete("http://localhost:3000/delete-installation-team-details", {
+        data: teams[indexToDelete],
+      })
+      .catch((error) => {
+        console.log(error);
+        fetchData();
+      });
+  };
 
   return (
     <>
@@ -43,6 +65,7 @@ const ViewTeam = () => {
                 <th>Service Zone Number</th>
                 <th>Installation Status</th>
                 <th>Expected Completion Date</th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -59,6 +82,23 @@ const ViewTeam = () => {
                   <td>{value.serviceZoneNumber}</td>
                   <td>{value.installationStatus}</td>
                   <td>{value.expectedCompletionDate}</td>
+                  <td>
+                    <div className="d-flex gap-2">
+                      <Link
+                        className="btn btn-sm btn-outline-primary"
+                        to="/edit-team"
+                        state={value}
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        className="btn btn-sm btn-outline-danger"
+                        onClick={() => handleDelete(index)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
