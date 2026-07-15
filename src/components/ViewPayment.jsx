@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 
 const ViewPayment = () => {
@@ -19,6 +20,27 @@ const ViewPayment = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleDelete = (indexToDelete) => {
+    const shouldDelete = window.confirm("Delete this payment record?");
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    setPayments((currentPayments) =>
+      currentPayments.filter((_, index) => index !== indexToDelete)
+    );
+
+    axios
+      .delete("http://localhost:3000/delete-payment-details", {
+        data: payments[indexToDelete],
+      })
+      .catch((error) => {
+        console.log(error);
+        fetchData();
+      });
+  };
 
   return (
     <>
@@ -42,6 +64,7 @@ const ViewPayment = () => {
                 <th>Payment Status</th>
                 <th>Payment Date</th>
                 <th>Transaction Reference Number</th>
+                <th>Action</th>
               </tr>
             </thead>
 
@@ -57,6 +80,23 @@ const ViewPayment = () => {
                   <td>{value.paymentStatus}</td>
                   <td>{value.paymentDate}</td>
                   <td>{value.TransactionRefNumber}</td>
+                  <td>
+                    <div className="d-flex gap-2">
+                      <Link
+                        className="btn btn-sm btn-outline-primary"
+                        to="/edit-payment"
+                        state={value}
+                      >
+                        Edit
+                      </Link>
+                      <button
+                        className="btn btn-sm btn-outline-danger"
+                        onClick={() => handleDelete(index)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
