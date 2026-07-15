@@ -3,14 +3,33 @@ import './App.css'
 import AddTeam from './components/AddTeam'
 import ViewCustomer from './components/ViewCustomer'
 import NavBar from './components/NavBar'
+import AddSolar from './components/AddSolar'
 
 function App() {
 
   return (
     <>
-    <AddTeam/>
-    <ViewCustomer/>
-    <Home/>
+    {/* <BrowserRouter>
+    
+    <Routes>
+
+      <Route path='/' element={}/>
+      <Route path='/add' element={}/>
+      <Route path='/view' element={}/>
+      <Route path='/addinstall' element={}/>
+      <Route path='/viewintall' element={}/>
+      <Route path='/addteam' element={}/>
+      <Route path='/viewteam' element={}/>
+      <Route path='/addpayment' element={}/>
+      <Route path='/viewpayment' element={}/>
+
+
+
+    </Routes>
+    
+    </BrowserRouter> */}
+
+    <AddSolar/>
     </>
   )
 }
