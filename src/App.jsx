@@ -3,6 +3,7 @@ import './App.css'
 import NavBar from './components/NavBar'
 import AddSolar from './components/AddSolar'
 import ViewSolar from './components/ViewSolar'
+import ViewPayment from './components/ViewPayment'
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
     
     </BrowserRouter> */}
 
-    <ViewSolar/>
+    <ViewPayment/>
     </>
   )
 }
