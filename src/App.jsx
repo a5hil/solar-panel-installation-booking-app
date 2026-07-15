@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import Home from './components/Home'
-import AddCustomer from './components/AddCustomer'
-import ViewCustomer from './components/ViewCustomer'
-import AddSolar from './components/AddSolar'
-import ViewSolar from './components/ViewSolar'
-import AddTeam from './components/AddTeam'
-import ViewTeam from './components/ViewTeam'
-import AddPayment from './components/AddPayment'
-import ViewPayment from './components/ViewPayment'
+import Home from './Components/Home'
+import AddCustomer from './Components/AddCustomer'
+import ViewCustomer from './Components/ViewCustomer'
+import AddSolar from './Components/AddSolar'
+import ViewSolar from './Components/ViewSolar'
+import AddTeam from './Components/AddTeam'
+import ViewTeam from './Components/ViewTeam'
+import AddPayment from './Components/AddPayment'
+import ViewPayment from './Components/ViewPayment'
 
 function App() {
 

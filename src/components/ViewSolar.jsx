@@ -1,12 +1,13 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import NavBar from "./NavBar";
 
 const ViewSolar = () => {
   const [installations, setInstallations] = useState([]);
 
   const fetchData = () => {
     axios
-      .get("http://localhost:3000/")
+      .post("http://localhost:3000/view-installation-details")
       .then((response) => {
         setInstallations(response.data);
       })
@@ -20,55 +21,51 @@ const ViewSolar = () => {
   }, []);
 
   return (
-    <div className="container-fluid mt-5 px-5">
-      <h2 className="text-center mb-4 text-success">
-        Solar Installation Details
-      </h2>
+    <>
+      <NavBar />
 
-      <div className="table-responsive">
-        <table className="table table-bordered table-striped table-hover">
-          <thead className="table-success">
-            <tr>
-              <th>Booking ID</th>
-              <th>Roof Area (sq.ft.)</th>
-              <th>Roof Type</th>
-              <th>Installation Date</th>
-              <th>Panel Capacity (kW)</th>
-              <th>Number of Solar Panels</th>
-              <th>Installation Type</th>
-              <th>Estimated Cost</th>
-              <th>Battery Backup Required</th>
-              <th>Expected Monthly Energy Generation (kWh)</th>
-            </tr>
-          </thead>
+      <div className="container-fluid mt-5 px-5">
+        <h2 className="text-center mb-4 text-success">
+          Solar Installation Details
+        </h2>
 
-          <tbody>
-            {installations.length > 0 ? (
-              installations.map((value, index) => (
+        <div className="table-responsive">
+          <table className="table table-bordered table-striped table-hover">
+            <thead className="table-success">
+              <tr>
+                <th>Booking ID</th>
+                <th>Roof Area (sq.ft.)</th>
+                <th>Roof Type</th>
+                <th>Installation Date</th>
+                <th>Panel Capacity (kW)</th>
+                <th>Number of Solar Panels</th>
+                <th>Installation Type</th>
+                <th>Estimated Cost</th>
+                <th>Battery Backup Required</th>
+                <th>Expected Monthly Energy Generation (kWh)</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {installations.map((value, index) => (
                 <tr key={index}>
                   <td>{value.bookingId}</td>
                   <td>{value.roofArea}</td>
                   <td>{value.roofType}</td>
                   <td>{value.installationDate}</td>
                   <td>{value.panelCapacity}</td>
-                  <td>{value.numberOfSolarPanels}</td>
+                  <td>{value.noOfPanels}</td>
                   <td>{value.installationType}</td>
                   <td>{value.estimatedCost}</td>
-                  <td>{value.batteryBackupRequired}</td>
-                  <td>{value.expectedMonthlyEnergyGeneration}</td>
+                  <td>{value.batteryBackup}</td>
+                  <td>{value.monthlyEnergyGeneration}</td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="10" className="text-center">
-                  No solar installation records found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

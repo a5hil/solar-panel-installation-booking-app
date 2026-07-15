@@ -1,12 +1,12 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow sticky-top">
       <div className="container-fluid">
-        <a className="navbar-brand fw-bold" href="/">
+        <Link className="navbar-brand fw-bold" to="/">
           ☀ SPI BOOKING APP
-        </a>
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -23,34 +23,34 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <div className="navbar-nav ms-auto">
 
-            <a className="nav-link" href="/">Home</a>
+            <Link className="nav-link" to="/">Home</Link>
 
-            <a className="nav-link" href="/add">Add Customer</a>
-            <a className="nav-link" href="/view">View Customer</a>
+            <Link className="nav-link" to="/add-customer">Add Customer</Link>
+                      <Link className="nav-link" to="/view-customer">View Customer</Link>
 
-            <a className="nav-link" href="/addinstall">
+                      <Link className="nav-link" to="/add-installation">
               Add Solar Installation
-            </a>
+            </Link>
 
-            <a className="nav-link" href="/viewinstall">
+                      <Link className="nav-link" to="/view-installation">
               View Solar Installation
-            </a>
+            </Link>
 
-            <a className="nav-link" href="/addteam">
+            <Link className="nav-link" to="/add-team">
               Add Installation Team
-            </a>
+            </Link>
 
-            <a className="nav-link" href="/viewteam">
+            <Link className="nav-link" to="/view-team">
               View Installation Team
-            </a>
+            </Link>
 
-            <a className="nav-link" href="/addpayment">
+            <Link className="nav-link" to="/add-payment">
               Add Payment
-            </a>
+            </Link>
 
-            <a className="nav-link" href="/viewpayment">
+            <Link className="nav-link" to="/view-payment">
               View Payment
-            </a>
+            </Link>
 
           </div>
         </div>
