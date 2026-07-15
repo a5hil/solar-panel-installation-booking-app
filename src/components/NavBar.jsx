@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 const NavBar = () => {
@@ -14,34 +15,34 @@ const NavBar = () => {
                             <a className="nav-link active" aria-current="page" href="/">Home</a>
                             <a className="nav-link" href="/add">Add Customer</a>
                             <a className="nav-link" href="/view">View Customer</a>
-                            
-                            
+
+
                         </div>
                     </div>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                             <a className="nav-link" href="/addinstall">Add Solar Installation Details</a>
                             <a className="nav-link" href="/viewinstall">View Solar Installation Details</a>
-                            
-                            
+
+
                         </div>
                     </div>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
-                            
+
                             <a className="nav-link" href="/addteam">Add Installation Team Details</a>
                             <a className="nav-link" href="/viewteam">View Installation Team Details</a>
-                            
-                            
+
+
                         </div>
                     </div>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
-                            
+
                             <a className="nav-link" href="/addpayment">Add Payment Details</a>
                             <a className="nav-link" href="/viewpayment">View Payment Details</a>
-                            
-                            
+
+
                         </div>
                     </div>
                 </div>
