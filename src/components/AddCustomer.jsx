@@ -2,56 +2,39 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const AddCustomer = () => {
-  const [input, changeInput] = useState({
-    bookingId: "",
-    customerName: "",
-    email: "",
-    phoneNumber: "",
-    alternatePhoneNumber: "",
-    propertyAddress: "",
-    city: "",
-    state: "",
-    pinCode: "",
-    propertyType: "",
-  });
+  const [input, changeInput] = useState(
+    {
+      bookingId: "",
+      customerName: "",
+      email: "",
+      phoneNumber: "",
+      alternatePhoneNumber: "",
+      address: "",
+      city: "",
+      state: "",
+      pincode: "",
+      propertyType: ""
+    }
+  )
 
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
+  const inputHandler = (event) => {
+    changeInput({ ...input, [event.target.name]: event.target.value })
+  }
 
-  const inputHandler = (e) => {
-    changeInput({ ...input, [e.target.name]: e.target.value });
-  };
-
-  const readValues = () => {
-    axios
-      .post("http://localhost:3000/", input)
-      .then(() => {
-        setMessage("Booking added successfully");
-        setError("");
-
-        changeInput({
-          bookingId: "",
-          customerName: "",
-          email: "",
-          phoneNumber: "",
-          alternatePhoneNumber: "",
-          propertyAddress: "",
-          city: "",
-          state: "",
-          pinCode: "",
-          propertyType: "",
-        });
-      })
-      .catch((err) => {
-        setMessage("");
-
-        if (err.response) {
-          setError(err.response.data.message);
-        } else {
-          setError("Something went wrong");
-        }
-      });
-  };
+  const readValue = () => {
+    console.log(input)
+    axios.post('http://localhost:3000/add-customer', input).then(
+      (response) => {
+        console.log(response.data)
+        alert("Customer added successfully")
+      }
+    ).catch(
+      (error) => {
+        console.log(error)
+        alert("Error adding customer")
+      }
+    )
+  }
 
   return (
     <div className="container mt-5">
@@ -65,14 +48,6 @@ const AddCustomer = () => {
             </div>
 
             <div className="card-body">
-              {message && (
-                <div className="alert alert-success">{message}</div>
-              )}
-
-              {error && (
-                <div className="alert alert-danger">{error}</div>
-              )}
-
               <div className="row g-3">
                 <div className="col-md-6">
                   <label className="form-label">Booking ID</label>
@@ -110,7 +85,7 @@ const AddCustomer = () => {
                 <div className="col-md-6">
                   <label className="form-label">Phone Number</label>
                   <input
-                    type="text"
+                    type="tel"
                     className="form-control"
                     name="phoneNumber"
                     value={input.phoneNumber}
@@ -123,7 +98,7 @@ const AddCustomer = () => {
                     Alternate Phone Number
                   </label>
                   <input
-                    type="text"
+                    type="tel"
                     className="form-control"
                     name="alternatePhoneNumber"
                     value={input.alternatePhoneNumber}
@@ -136,8 +111,8 @@ const AddCustomer = () => {
                   <input
                     type="text"
                     className="form-control"
-                    name="propertyAddress"
-                    value={input.propertyAddress}
+                    name="address"
+                    value={input.address}
                     onChange={inputHandler}
                   />
                 </div>
@@ -169,8 +144,8 @@ const AddCustomer = () => {
                   <input
                     type="text"
                     className="form-control"
-                    name="pinCode"
-                    value={input.pinCode}
+                    name="pincode"
+                    value={input.pincode}
                     onChange={inputHandler}
                   />
                 </div>
@@ -194,7 +169,7 @@ const AddCustomer = () => {
                 <div className="col-12 text-center mt-4">
                   <button
                     className="btn btn-success px-5"
-                    onClick={readValues}
+                    onClick={readValue}
                   >
                     Book Installation
                   </button>

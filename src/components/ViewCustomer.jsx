@@ -6,7 +6,7 @@ const ViewCustomer = () => {
 
   const fetchData = () => {
     axios
-      .get("http://localhost:3000/")
+      .post("http://localhost:3000/view-customers")
       .then((response) => {
         setCustomers(response.data);
       })
@@ -50,10 +50,10 @@ const ViewCustomer = () => {
                 <td>{value.email}</td>
                 <td>{value.phoneNumber}</td>
                 <td>{value.alternatePhoneNumber}</td>
-                <td>{value.propertyAddress}</td>
+                <td>{value.address}</td>
                 <td>{value.city}</td>
                 <td>{value.state}</td>
-                <td>{value.pinCode}</td>
+                <td>{value.pincode}</td>
                 <td>{value.propertyType}</td>
               </tr>
             ))}
